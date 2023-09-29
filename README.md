@@ -1,1 +1,1 @@
-# client-server-sockets
+# Client and Server Sockets in Python
