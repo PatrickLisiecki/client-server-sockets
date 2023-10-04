@@ -16,12 +16,13 @@ print(msg.decode("utf-8"))
 
 while True:
   # Prompt user to enter a sentence
-  sentence = input("Input a lowercase sentence: ")
+  num = input("Input a positive integer: ")
 
   # Send the sentence to the server
-  cltSkt.send(bytes(sentence, "utf-8"))
+  cltSkt.send(bytes(num, "utf-8"))
 
   # Decode and display the received message from the server
   msgRecvd = cltSkt.recv(1024)
   print("From Server: ", msgRecvd.decode("utf-8"))
-  cltSkt.close()
+  
+cltSkt.close()

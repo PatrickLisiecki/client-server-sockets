@@ -21,18 +21,28 @@ while True:
   # Send a message to the client
   connectionSocket.send(bytes("Welcome to the server!", "utf-8"))
     
-  # Listen for incoming sentences
-  sentence = connectionSocket.recv(1024)
+  # Listen for incoming integers
+  data = connectionSocket.recv(1024)
 
-  # Check if a sentence was received
-  if len(sentence) <= 0:
+  # Check if the integer that was received is valid
+  if len(data) <= 0:
     break
   else:
-    # Print the original sentence
-    print(sentence)
+    # Convert the bytes to an int type
+    num = int(data)
 
-    # Send and print the capitalized sentece
-    capitalizedSentence = sentence.upper()
-    connectionSocket.send(capitalizedSentence)
-    print(capitalizedSentence)
-    connectionSocket.close()
+    # Print the original integer
+    print("Original integer: ", num)
+
+    # Calculate the int to the 9th power
+    newNum = pow(num, 9)
+
+    # Convert back to a string to send back to the client
+    dataToSend = str(newNum)
+
+    # Convert the string back to bytes and send to the client
+    connectionSocket.send(bytes(dataToSend, "utf-8"))
+
+    print("Calculated integer: ", newNum)
+    
+connectionSocket.close()
